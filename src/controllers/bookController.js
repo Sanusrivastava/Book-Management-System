@@ -22,7 +22,7 @@ const createBook = async function (req, res) {
                 .status(400)
                 .send({ status: false, message: "Bad Request, Please enter the details in the request body." });
 
-        const { title, excerpt, userId, ISBN, category, subcategory, releasedAt,bookCover } = data;
+        const { title, excerpt, userId, ISBN, category, subcategory, releasedAt } = data;
 
         if (!isValid(title))
             return res
@@ -98,7 +98,7 @@ const createBook = async function (req, res) {
 
 let getBooksByQuery = async function (req, res) {
     let queryData = req.query;
-    let { userId, category, subcategory } = queryData;
+    let { userId } = queryData;
 
     if (!queryData) {
         let findData = await bookModel.find({ isDeleted: false }).select({
